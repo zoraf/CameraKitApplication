@@ -5,18 +5,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context="com.zoraf.camerakitapplication.MainActivity">
 
-    <com.wonderkiln.camerakit.CameraView
-        android:id="@+id/cameraView"
-        app:ckFlash="auto"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:adjustViewBounds="true" />
+    <com.camerakit.CameraKitView
+        android:id="@+id/camera"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        app:camera_imageJpegQuality="100"/>
 
 
     <Button
-        android:id="@+id/captureBtn"
+        android:id="@+id/btnCapture"
         android:layout_width="75dp"
         android:layout_height="75dp"
         android:textColor="#fff"
