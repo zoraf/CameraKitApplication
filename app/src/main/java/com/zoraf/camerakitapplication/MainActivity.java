@@ -1,10 +1,12 @@
 package com.zoraf.camerakitapplication;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -20,7 +22,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public static final String TAG = "MainActivity";
     private CameraKitView mCameraKitView;
     private Button mCaptureImageButton;
-
+    private ImageView mImageView;
+    private String root;
+    String path = root + "/NTASKER/";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,9 +73,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mCameraKitView.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
-    @Override
     public void onClick(View view) {
-        Log.d(TAG, "onClick: ");
         switch (view.getId()) {
             case R.id.btnCapture:
                 Log.d(TAG, "onClick: ");
@@ -79,11 +81,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     @Override
                     public void onImage(CameraKitView cameraKitView, byte[] capturedImage) {
                         Log.d(TAG, "onImage: " + Environment.getExternalStorageDirectory());
-                        File savedPhoto = new File(Environment.getExternalStorageDirectory(), "photo.jpg");
+                        File savedPhoto = new File(path, "photo.jpg");
                         try {
                             FileOutputStream outputStream = new FileOutputStream(savedPhoto.getPath());
+                            Log.d(TAG, "onImage: " + savedPhoto.getPath());
                             outputStream.write(capturedImage);
                             outputStream.close();
+                            Log.d(TAG, "onImage: "+ Uri.fromFile(savedPhoto));
+
                         } catch (java.io.IOException e) {
                             e.printStackTrace();
                         }
